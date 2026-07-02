@@ -43,7 +43,7 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      -.:/app
+      - .:/app
     environment:
       TZ: Asia/Tokyo
     depends_on:
