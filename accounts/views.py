@@ -7,7 +7,7 @@ from .forms import EmailAuthenticationForm, RegistrationForm
 class RegisterView(FormView):
     template_name = 'accounts/register.html'
     form_class = RegistrationForm
-    success_url = reverse_lazy('dashboard')
+    success_url = reverse_lazy('notebook:dashboard')
 
     def form_valid(self, form):
         user = form.save()
