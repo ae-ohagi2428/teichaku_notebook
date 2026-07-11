@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}定着ノート - 学んだことを、もう忘れない。{% endblock %}
+
+{% block content %}
+<div class="max-w-[1100px] mx-auto px-4 py-8 lg:py-14">
+
+    <!-- ① ヒーロー -->
+    <section class="text-center mb-12 lg:mb-20">
+        <div class="badge badge-primary badge-outline mb-4">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 mr-1"></i>
+            間隔反復で、記憶を定着
+        </div>
+
+        <!-- アプリ名 -->
+        <div class="flex items-center justify-center gap-3 mb-8">
+            <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <i data-lucide="notebook-pen" class="w-9 h-9 lg:w-11 lg:h-11 text-primary"></i>
+            </div>
+            <span class="text-4xl lg:text-6xl font-black tracking-tight">定着ノート</span>
+        </div>
+
+        <h1 class="text-2xl lg:text-3xl font-black leading-tight mb-6 opacity-90">
+            学んだことを、<br class="sm:hidden">もう忘れない。
+        </h1>
+        <p class="opacity-70 text-sm lg:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+            定着ノートは「1日1ノート」で学びを記録し、忘れかけた頃に復習を提案する学習ノートアプリです。
+            忘却曲線に基づき、適切なタイミングで振り返ることで、知識がしっかり定着します。
+        </p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'notebook:dashboard' %}" class="btn btn-primary rounded-full px-8">
+                ダッシュボードへ
+            </a>
+        {% else %}
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="{% url 'accounts:register' %}" class="btn btn-primary rounded-full px-8">
+                    無料で始める
+                </a>
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline rounded-full px-8">
+                    ログイン
+                </a>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- ダッシュボードのスクリーンショット -->
+    <section class="mb-12 lg:mb-20" data-reveal>
+        <img src="{% static 'home/images/dashboard.png' %}" alt="定着ノートのダッシュボード画面"
+             class="w-full max-w-3xl mx-auto rounded-[22px] lg:rounded-[28px] shadow-md border border-base-200">
+    </section>
+
+    <!-- ② アプリの使い方（3ステップ） -->
+    <section class="mb-12 lg:mb-20" data-reveal>
+        <h2 class="text-2xl lg:text-3xl font-black text-center mb-8 lg:mb-12">使い方はかんたん3ステップ</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-7">
+
+            <div class="card bg-base-100 shadow-md rounded-[22px] p-6 lg:p-8">
+                <div class="flex items-center gap-3 mb-2">
+                    <i data-lucide="pen-line" class="w-7 h-7 text-primary"></i>
+                    <span class="text-primary text-3xl font-black">1</span>
+                </div>
+                <h3 class="font-extrabold text-lg mb-2">今日のノートを書く</h3>
+                <p class="opacity-70 text-sm leading-relaxed">
+                    学んだことを1日1枚のノートに記録。Markdownで見出しやリストも使えます。
+                </p>
+            </div>
+
+            <div class="card bg-base-100 shadow-md rounded-[22px] p-6 lg:p-8">
+                <div class="flex items-center gap-3 mb-2">
+                    <i data-lucide="calendar-clock" class="w-7 h-7 text-primary"></i>
+                    <span class="text-primary text-3xl font-black">2</span>
+                </div>
+                <h3 class="font-extrabold text-lg mb-2">「復習ノート」のボタンを押す</h3>
+                <p class="opacity-70 text-sm leading-relaxed">
+                    1日後・1週間後・2週間後・1ヶ月後に、復習すべきノートが自動で提案されます。
+                </p>
+            </div>
+
+            <div class="card bg-base-100 shadow-md rounded-[22px] p-6 lg:p-8">
+                <div class="flex items-center gap-3 mb-2">
+                    <i data-lucide="brain" class="w-7 h-7 text-primary"></i>
+                    <span class="text-primary text-3xl font-black">3</span>
+                </div>
+                <h3 class="font-extrabold text-lg mb-2">振り返って定着させる</h3>
+                <p class="opacity-70 text-sm leading-relaxed">
+                    提案されたノートを見返すだけ。忘れかけたタイミングに復習することで、記憶が長持ちします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ③ 忘却曲線（ダッシュボードのカードを流用） -->
+    <section class="mb-12 lg:mb-20" data-reveal>
+        {% include "notebook/_forgetting_curve.html" %}
+    </section>
+
+    <!-- ④ お知らせ -->
+    <section data-reveal>
+        <h2 class="text-2xl lg:text-3xl font-black text-center mb-8 flex items-center justify-center gap-2">
+            <i data-lucide="megaphone" class="w-6 h-6 text-primary"></i>
+            お知らせ
+        </h2>
+        <div class="card bg-base-100 shadow-md rounded-[22px] lg:rounded-[28px] p-6 lg:p-8 max-w-2xl mx-auto">
+            <ul class="flex flex-col gap-4">
+                <li class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                    <span class="badge badge-primary badge-outline shrink-0">2026.07.11</span>
+                    <span class="text-sm opacity-80">定着ノートを公開しました。</span>
+                </li>
+                <!-- お知らせを追加するときは、上の <li> をコピーして日付と文言を変更 -->
+            </ul>
+            <p class="opacity-50 text-xs mt-6">
+                ※ 本アプリは学習用に開発したポートフォリオ作品です。
+            </p>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

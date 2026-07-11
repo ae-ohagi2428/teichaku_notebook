@@ -1,0 +1,45 @@
+<div class="card bg-base-100 shadow-md rounded-[22px] lg:rounded-[28px] p-6 lg:p-10">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-12 items-center">
+        <div>
+            <svg viewBox="0 0 320 180" class="w-full h-auto mb-3" xmlns="http://www.w3.org/2000/svg">
+                <!-- 軸 -->
+                <line x1="30" y1="10" x2="30" y2="150" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+                <line x1="30" y1="150" x2="310" y2="150" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+
+                <!-- 目盛りの縦ガイド（復習ポイント） -->
+                <g stroke="currentColor" stroke-width="1" opacity="0.12" stroke-dasharray="3 3">
+                    <line x1="90" y1="20" x2="90" y2="150"/>
+                    <line x1="150" y1="20" x2="150" y2="150"/>
+                    <line x1="210" y1="20" x2="210" y2="150"/>
+                    <line x1="270" y1="20" x2="270" y2="150"/>
+                </g>
+
+                <!-- 復習なし（青）：なめらかに下がりっぱなし -->
+                <path d="M30,20 C 50,60 70,95 90,112 C 140,128 210,138 310,142"
+                      fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+
+                <!-- 復習あり（オレンジ）：右にいくほど下降の底を浅く（ジグザグを小さく） -->
+                <path d="M30,20 C 50,60 70,95 90,112
+                         L 90,20
+                         C 112,46 132,66 150,76
+                         L 150,20
+                         C 172,42 192,54 210,62
+                         L 210,20
+                         C 232,38 252,46 270,52
+                         L 270,20
+                         C 286,34 298,40 310,44"
+                      fill="none" stroke="#f97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="flex gap-3.5 text-[11px]">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#3b82f6;"></span>復習なし</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full" style="background:#f97316;"></span>間隔反復あり</span>
+            </div>
+        </div>
+        <div>
+            <div class="badge badge-outline text-[11px] mb-3">忘却曲線とは</div>
+            <h2 class="text-lg lg:text-xl font-extrabold mb-3">記憶は、何もしなければ急速に薄れていきます</h2>
+            <p class="text-sm opacity-70 leading-relaxed mb-4 lg:max-w-[560px]">心理学者エビングハウスが発見した「忘却曲線」によれば、人は学んだ内容の約半分を1日以内に忘れてしまいます。しかし、忘れかけたタイミングで復習（<strong class="text-base-content/90">間隔反復</strong>）を行うことで、記憶が定着しやすくなります。</p>
+            <p class="text-sm opacity-70 leading-relaxed">定着ノートでは「忘却曲線」に基づき、ノート作成から1日後・1週間後・2週間後・1ヶ月後と、適切なタイミングで復習する内容を自動で提案します。「復習ノート」ボタンから、その日の分を順番にこなしていくだけで十分です。</p>
+        </div>
+    </div>
+</div>

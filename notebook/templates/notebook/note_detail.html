@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load markdown_extras %}
+
+{% block title %}{{ note.title }} - 定着ノート{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-6 lg:py-10">
+
+    <div class="card bg-base-100 shadow-md rounded-[22px] lg:rounded-[28px] p-6 lg:p-10">
+
+        <div class="badge badge-primary badge-outline mb-3">{{ note.date|date:'Y年n月j日' }}</div>
+        <h1 class="text-2xl lg:text-[32px] font-black mb-6">{{ note.title }}</h1>
+
+        <div class="prose max-w-none">
+            {{ note.content|markdown_to_html|safe }}
+        </div>
+
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 mt-6">
+        <a href="{% url 'notebook:edit' pk=note.pk %}" class="btn btn-primary rounded-full w-52 sm:px-8">
+            ノートを編集する
+        </a>
+        <a href="{% url 'notebook:dashboard' %}" class="btn btn-outline rounded-full w-52 sm:px-8">
+            ダッシュボードに戻る
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}ダッシュボード - 定着ノート{% endblock %}
+
+{% block content %}
+<div class="max-w-[1440px] mx-auto px-4 py-6 lg:px-14 lg:py-10">
+
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-8">
+        <div>
+            <h1 class="text-2xl lg:text-[32px] font-black mb-1">おかえりなさい、{{ user.username }}さん</h1>
+            <p class="opacity-60 text-sm">今日も1ノート、積み重ねていきましょう。</p>
+        </div>
+        <div class="flex gap-2 self-start lg:self-auto">
+            <div class="badge badge-lg" style="background:#fff1e6;color:#c2540a;border:none;font-weight:700;padding:18px 16px;border-radius:9999px;">
+                <i data-lucide="flame" class="w-4 h-4 mr-1"></i>
+                連続 {{ streak_days }}日
+            </div>
+            <div class="badge badge-lg badge-ghost" style="font-weight:700; padding:18px 16px;border-radius:9999px;">
+                <i data-lucide="book-open" class="w-4 h-4 mr-1"></i>
+                累計 {{ total_notes }}ノート
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-5 lg:gap-7">
+        <div class="flex flex-col gap-5 lg:gap-7">
+
+            <div class="card bg-base-100 shadow-md rounded-[22px] lg:rounded-[28px] p-5 lg:p-8">
+                <div class="flex items-center gap-4 lg:gap-6">
+                    <div class="w-14 h-14 lg:w-20 lg:h-20 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <i data-lucide="pen-line" class="w-7 h-7 lg:w-10 lg:h-10 text-primary"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="badge badge-primary badge-outline mb-2">今日のノート</div>
+                        {% if today_note %}
+                            <h2 class="text-lg lg:text-2xl font-extrabold mb-3">今日のノートを振り返ろう</h2>
+                            <a href="{% url 'notebook:detail' pk=today_note.pk %}" class="btn btn-primary rounded-full w-full sm:w-auto sm:px-7">
+                                ノートを見る
+                            </a>
+                        {% else %}
+                            <h2 class="text-lg lg:text-2xl font-extrabold mb-3">今日はまだノートを作成していません</h2>
+                            <a href="{% url 'notebook:create' %}" class="btn btn-primary rounded-full w-full sm:w-auto sm:px-7">
+                                新規ノートを作成
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card bg-base-100 shadow-md rounded-[22px] lg:rounded-[28px] p-5 lg:p-8">
+                <div class="flex items-center gap-4 lg:gap-6">
+                    <div class="w-14 h-14 lg:w-20 lg:h-20 rounded-full flex items-center justify-center shrink-0" style="background:#7c6fd620;">
+                        <i data-lucide="calendar-clock" class="w-7 h-7 lg:w-10 lg:h-10" style="color:#7c6fd6;"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="badge badge-outline mb-2" style="color:#7c6fd6;border-color:#7c6fd6;">復習ノート</div>
+                        {% if review_count %}
+                            <h2 class="text-lg lg:text-2xl font-extrabold mb-3">{{ review_count }}件のノートを復習しましょう</h2>
+                        {% else %}
+                            <h2 class="text-lg lg:text-2xl font-extrabold mb-3">今日復習するノートはありません</h2>
+                        {% endif %}
+                        <div class="flex flex-wrap gap-2.5">
+                            {% for item in review_notes %}
+                                {% if item.note %}
+                                    <a href="{% url 'notebook:detail' pk=item.note.pk %}"
+                                       class="btn rounded-full text-white border-none hover:opacity-90" style="background:#7c6fd6;">
+                                        {{ item.label }}
+                                    </a>
+                                {% else %}
+                                    <span class="btn btn-disabled rounded-full">
+                                        {{ item.label }}
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-5 lg:gap-7">
+            <div class="card bg-base-100 shadow-md rounded-[22px] lg:rounded-[28px] p-4 lg:p-6">
+                <div class="flex justify-between items-center mb-3">
+                    <a href="?year={{ prev_month.year }}&month={{ prev_month.month }}" class="btn btn-ghost btn-sm">‹ 前月</a>
+                    <span class="font-extrabold text-sm">{{ current_month|date:'Y年n月' }}</span>
+                    {% if not is_current_month %}
+                        <a href="?year={{ next_month.year }}&month={{ next_month.month }}" class="btn btn-ghost btn-sm">翌月 ›</a>
+                    {% else %}
+                        <span class="btn btn-ghost btn-sm invisible">翌月 ›</span>
+                    {% endif %}
+                </div>
+                <div class="grid grid-cols-7 gap-1.5 text-[11px] text-center opacity-50 mb-1">
+                    <span class="text-error">日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span class="text-info">土</span>
+                </div>
+                <div class="grid grid-cols-7 gap-1.5">
+                    {% for week in calendar_weeks %}
+                        {% for day in week %}
+                            <div class="aspect-square rounded-lg flex items-center justify-center text-xs">
+                                {% if day.in_month %}
+                                    {% if day.note %}
+                                        <a href="{% url 'notebook:detail' pk=day.note.pk %}"
+                                           class="flex items-center justify-center aspect-square w-full rounded-full bg-primary text-primary-content font-bold hover:opacity-80">
+                                            {{ day.date.day }}
+                                        </a>
+                                    {% else %}
+                                        <span class="flex items-center justify-center aspect-square w-full rounded-full text-base-content/60">
+                                            {{ day.date.day }}
+                                        </span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 lg:mt-7">
+        {% include "notebook/_forgetting_curve.html" %}
+    </div>
+
+</div>
+{% endblock %}
