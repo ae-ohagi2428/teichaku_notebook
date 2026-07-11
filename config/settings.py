@@ -80,9 +80,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:password@db:5432/myapp_development',
+        default=f"postgresql://postgres:{os.environ.get('POSTGRES_PASSWORD')}@db:5432/myapp_development",
         conn_max_age=600
     )
 }
