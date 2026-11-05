@@ -5,7 +5,7 @@
 
 ## 公開URL
 
-https://teichaku-web.onrender.com
+https://teichaku-web-tvy3.onrender.com/
 
 ※ 無料プランのため、初回アクセス時は起動に数十秒かかることがあります。
 
