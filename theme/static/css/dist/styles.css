@@ -30,8 +30,6 @@
     --text-3xl--line-height: calc(2.25 / 1.875);
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
-    --text-5xl: 3rem;
-    --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
     --font-weight-bold: 700;
@@ -478,61 +476,6 @@
   }
   .invisible {
     visibility: hidden;
-  }
-  @layer daisyui.l1.l2.l3 {
-    .list {
-      display: flex;
-      flex-direction: column;
-      font-size: 0.875rem;
-    }
-    .list .list-row {
-      --list-grid-cols: minmax(0, auto) 1fr;
-      position: relative;
-      display: grid;
-      grid-auto-flow: column;
-      gap: calc(0.25rem * 4);
-      border-radius: var(--radius-box);
-      padding: calc(0.25rem * 4);
-      word-break: break-word;
-      grid-template-columns: var(--list-grid-cols);
-    }
-    .list > :not(:last-child).list-row:after, .list > :not(:last-child) .list-row:after {
-      content: "";
-      border-bottom: var(--border) solid;
-      inset-inline: var(--radius-box);
-      position: absolute;
-      bottom: 0;
-      border-color: var(--color-base-content);
-    }
-    @supports (color: color-mix(in lab, red, red)) {
-      .list > :not(:last-child).list-row:after, .list > :not(:last-child) .list-row:after {
-        border-color: color-mix(in oklab, var(--color-base-content) 5%, transparent);
-      }
-    }
-  }
-  @layer daisyui.l1.l2 {
-    .list .list-row:has(.list-col-grow:nth-child(1)) {
-      --list-grid-cols: 1fr;
-    }
-    .list .list-row:has(.list-col-grow:nth-child(2)) {
-      --list-grid-cols: minmax(0, auto) 1fr;
-    }
-    .list .list-row:has(.list-col-grow:nth-child(3)) {
-      --list-grid-cols: minmax(0, auto) minmax(0, auto) 1fr;
-    }
-    .list .list-row:has(.list-col-grow:nth-child(4)) {
-      --list-grid-cols: minmax(0, auto) minmax(0, auto) minmax(0, auto) 1fr;
-    }
-    .list .list-row:has(.list-col-grow:nth-child(5)) {
-      --list-grid-cols: minmax(0, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto) 1fr;
-    }
-    .list .list-row:has(.list-col-grow:nth-child(6)) {
-      --list-grid-cols: minmax(0, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto)
-          minmax(0, auto) 1fr;
-    }
-    .list .list-row > * {
-      grid-row-start: 1;
-    }
   }
   @layer daisyui.l1.l2.l3 {
     .input {
@@ -1363,9 +1306,6 @@
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
-  .mb-5 {
-    margin-bottom: calc(var(--spacing) * 5);
-  }
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
@@ -1625,9 +1565,6 @@
   .h-9 {
     height: calc(var(--spacing) * 9);
   }
-  .h-12 {
-    height: calc(var(--spacing) * 12);
-  }
   .h-14 {
     height: calc(var(--spacing) * 14);
   }
@@ -1654,9 +1591,6 @@
   }
   .w-9 {
     width: calc(var(--spacing) * 9);
-  }
-  .w-12 {
-    width: calc(var(--spacing) * 12);
   }
   .w-14 {
     width: calc(var(--spacing) * 14);
@@ -2134,11 +2068,6 @@
     }
   }
   @media (width >= 64rem) {
-    .lg\:h-8 {
-      height: calc(var(--spacing) * 8);
-    }
-  }
-  @media (width >= 64rem) {
     .lg\:h-10 {
       height: calc(var(--spacing) * 10);
     }
@@ -2149,18 +2078,8 @@
     }
   }
   @media (width >= 64rem) {
-    .lg\:h-14 {
-      height: calc(var(--spacing) * 14);
-    }
-  }
-  @media (width >= 64rem) {
     .lg\:h-20 {
       height: calc(var(--spacing) * 20);
-    }
-  }
-  @media (width >= 64rem) {
-    .lg\:w-8 {
-      width: calc(var(--spacing) * 8);
     }
   }
   @media (width >= 64rem) {
@@ -2171,11 +2090,6 @@
   @media (width >= 64rem) {
     .lg\:w-11 {
       width: calc(var(--spacing) * 11);
-    }
-  }
-  @media (width >= 64rem) {
-    .lg\:w-14 {
-      width: calc(var(--spacing) * 14);
     }
   }
   @media (width >= 64rem) {
@@ -2296,12 +2210,6 @@
     }
   }
   @media (width >= 64rem) {
-    .lg\:text-5xl {
-      font-size: var(--text-5xl);
-      line-height: var(--tw-leading, var(--text-5xl--line-height));
-    }
-  }
-  @media (width >= 64rem) {
     .lg\:text-6xl {
       font-size: var(--text-6xl);
       line-height: var(--tw-leading, var(--text-6xl--line-height));
@@ -2317,11 +2225,6 @@
     .lg\:text-xl {
       font-size: var(--text-xl);
       line-height: var(--tw-leading, var(--text-xl--line-height));
-    }
-  }
-  @media (width >= 64rem) {
-    .lg\:text-\[22px\] {
-      font-size: 22px;
     }
   }
   @media (width >= 64rem) {
