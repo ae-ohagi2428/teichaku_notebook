@@ -7,8 +7,6 @@
 
 https://teichaku-web-tvy3.onrender.com/
 
-※ 無料プランのため、初回アクセス時は起動に数十秒かかることがあります。
-
 ## アプリを作った理由
 
 RUNTEQの学習では、日々の学習結果を日報・週報としてまとめ、各自がmattermost上で公開しています。
@@ -31,11 +29,11 @@ RUNTEQの学習では、日々の学習結果を日報・週報としてまと�
 
 | 分類 | 技術 |
 |------|------|
-| バックエンド | Python 3.14 / Django 5.2 |
-| データベース | PostgreSQL 16 |
+| バックエンド | Python 3.12 / Django 5.2 |
+| データベース | PostgreSQL 16（本番：Neon） |
 | フロントエンド | TailwindCSS v4 / daisyUI |
 | 開発環境 | Docker / Docker Compose |
-| デプロイ | Render / Gunicorn + Uvicorn / WhiteNoise |
+| デプロイ | Render / Gunicorn / WhiteNoise |
 
 ## 工夫した点
 
