@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from datetime import date
 
 User = get_user_model()
 
@@ -10,7 +11,7 @@ class Note(models.Model):
         verbose_name="ユーザー"
     )
     date = models.DateField(
-        auto_now_add=True,
+        default=date.today,
         verbose_name="日付"
     )
     title = models.CharField(
@@ -28,6 +29,8 @@ class Note(models.Model):
         auto_now = True,
         verbose_name="更新日時"
     )
+    def __str__(self):
+        return f'{self.date} {self.title}'
 
     class Meta:
         constraints = [
